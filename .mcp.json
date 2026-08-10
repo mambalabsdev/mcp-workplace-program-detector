@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-workplace-program-detector": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-workplace-program-detector"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}

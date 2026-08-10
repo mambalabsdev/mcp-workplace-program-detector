@@ -1,0 +1,54 @@
+{
+  "name": "@mambalabsdev/mcp-workplace-program-detector",
+  "displayName": "Workplace Program Detector",
+  "version": "1.0.0",
+  "description": "MCP server for the Mamba Labs Workplace Program Detector actor on Apify. Detects which people programs a company publishes: employee resource groups, DEI, wellbeing, learning, parental leave and volunteering.",
+  "type": "module",
+  "bin": {
+    "mcp-workplace-program-detector": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "employee-benefits",
+    "dei",
+    "apify",
+    "clay"
+  ],
+  "tags": [
+    "mcp",
+    "employee-benefits",
+    "dei",
+    "apify",
+    "clay"
+  ],
+  "category": "productivity",
+  "author": {
+    "name": "Mamba Labs",
+    "email": "labs@mambamindsetgrowth.com"
+  },
+  "license": "MIT",
+  "logo": "https://mmg-brand-assets.netlify.app/apify-actor-pngs/apify_webhook.png",
+  "homepage": "https://mambabuilt.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mambalabsdev/mcp-workplace-program-detector"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.6.0"
+  },
+  "mcpServers": ".mcp.json",
+  "mcpName": "com.mambabuilt/mcp-workplace-program-detector"
+}
