@@ -138,6 +138,7 @@ server.registerTool(
     inputSchema: {
     domain: z.string().describe("Bare domain, for example hubspot.com. Protocol and path are stripped."),
     ats_slug: z.string().optional().describe("Skip ATS discovery and read this Greenhouse, Lever or Ashby board slug directly."),
+    programs: z.array(z.enum(["erg", "dei", "wellbeing", "learning", "parental", "volunteering"])).optional().describe("Report only these program families. Omit for all six. A family you do not select reports null on its boolean, its evidence URL and its evidence phrase, never false, and is not counted in program_count. A selected family that is genuinely absent still reports false. Narrowing does not make a run cheaper: the corpus is the same either way, only the matching is narrowed."),
     scan_job_postings: z.boolean().optional().describe("Reads the company's live job bodies from its ATS. This path finds benefits language that marketing pages omit. Default: true."),
     scan_web_pages: z.boolean().optional().describe("Probes the careers, culture, benefits, DEI and ESG paths. This path finds ERG and volunteering language that job postings omit. Default: true."),
     max_pages: z.string().optional().describe("Sent as a string for Clay. Clamped to 1 to 25. Default: \"14\"."),

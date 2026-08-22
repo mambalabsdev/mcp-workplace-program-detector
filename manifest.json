@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "mcp-workplace-program-detector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP server for the Mamba Labs Workplace Program Detector actor on Apify. Detects which people programs a company publishes: employee resource groups, DEI, wellbeing, learning, parental leave and volunteering.",
   "author": {
     "name": "Mamba Labs"

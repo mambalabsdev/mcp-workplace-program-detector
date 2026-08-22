@@ -38,6 +38,7 @@ A company domain in, the people programs that company publishes out: employee re
 | --- | --- | --- | --- |
 | `domain` | string | yes | Bare domain, for example hubspot.com. Protocol and path are stripped. |
 | `ats_slug` | string | no | Skip ATS discovery and read this Greenhouse, Lever or Ashby board slug directly. |
+| `programs` | array | no | Report only these families: `erg`, `dei`, `wellbeing`, `learning`, `parental`, `volunteering`. Omit for all six. A family you do not select reports `null`, never `false`, and is not counted in `program_count`. |
 | `scan_job_postings` | boolean | no | Reads the company's live job bodies from its ATS. This path finds benefits language that marketing pages omit. |
 | `scan_web_pages` | boolean | no | Probes the careers, culture, benefits, DEI and ESG paths. This path finds ERG and volunteering language that job postings omit. |
 | `max_pages` | string | no | Sent as a string for Clay. Clamped to 1 to 25. |
