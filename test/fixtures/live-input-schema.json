@@ -1,0 +1,105 @@
+{
+  "_provenance": {
+    "actorId": "Li6pPDhqbdzFz3h7G",
+    "buildId": "0kLO6ACcb9U3BRjSe",
+    "buildNumber": "0.0.12",
+    "readAt": "2026-10-05T15:44:59.402Z"
+  },
+  "title": "Workplace Program Detector",
+  "description": "A company domain in, the people programs that company publishes out.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domain": {
+      "title": "Company domain",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Bare domain, for example hubspot.com. Protocol and path are stripped.",
+      "prefill": "hubspot.com"
+    },
+    "programs": {
+      "title": "Programs To Report",
+      "type": "array",
+      "description": "Report only these program families. Leave empty for all six, which is what the actor has always done. A family you do not select reports null on every one of its fields, never false, and is not counted in program_count.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "erg",
+          "dei",
+          "wellbeing",
+          "learning",
+          "parental",
+          "volunteering"
+        ],
+        "enumTitles": [
+          "Employee resource groups",
+          "DEI program",
+          "Wellbeing program",
+          "Learning and development",
+          "Parental leave policy",
+          "Volunteering program"
+        ]
+      },
+      "default": [],
+      "prefill": [
+        "parental"
+      ]
+    },
+    "ats_slug": {
+      "title": "ATS slug override",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Skip ATS discovery and read this Greenhouse, Lever or Ashby board slug directly."
+    },
+    "scan_job_postings": {
+      "title": "Scan job postings",
+      "type": "boolean",
+      "editor": "checkbox",
+      "description": "Reads the company's live job bodies from its ATS. This path finds benefits language that marketing pages omit.",
+      "default": true,
+      "prefill": true
+    },
+    "scan_web_pages": {
+      "title": "Scan website pages",
+      "type": "boolean",
+      "editor": "checkbox",
+      "description": "Probes the careers, culture, benefits, DEI and ESG paths. This path finds ERG and volunteering language that job postings omit.",
+      "default": true,
+      "prefill": true
+    },
+    "max_pages": {
+      "title": "Max pages to fetch",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Sent as a string for Clay. Clamped to 1 to 25.",
+      "default": "14",
+      "prefill": "14"
+    },
+    "skipCache": {
+      "title": "Skip cache",
+      "type": "string",
+      "editor": "select",
+      "description": "false uses the 14 day cache, true forces a fresh crawl. Sent as a string for Clay, matching the fleet convention.",
+      "enum": [
+        "false",
+        "true"
+      ],
+      "enumTitles": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "prefill": "false"
+    },
+    "source_tag": {
+      "title": "Source Tag",
+      "type": "string",
+      "description": "Internal attribution tag set by Mamba Labs on published task examples. Not required, and nothing depends on it. Leave it empty.",
+      "editor": "hidden"
+    }
+  },
+  "required": [
+    "domain"
+  ]
+}
