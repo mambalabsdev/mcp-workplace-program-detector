@@ -43,12 +43,20 @@ A company domain in, the people programs that company publishes out: employee re
 | `scan_web_pages` | boolean | no | Probes the careers, culture, benefits, DEI and ESG paths. This path finds ERG and volunteering language that job postings omit. |
 | `max_pages` | string | no | Sent as a string for Clay. Clamped to 1 to 25. |
 | `skipCache` | enum | no | false uses the 14 day cache, true forces a fresh crawl. Sent as a string for Clay, matching the fleet convention. |
+| `max_charge_usd` | number | no | Optional spending cap for this call, in USD. The actor stops before any charge that would take the run past this amount and keeps every row already charged. |
 
 ## Billing
 
 You are charged per domain analyzed, plus a small actor start fee.
 
-Pricing is on the [actor's Apify page](https://apify.com/mambalabs/workplace-program-detector). Running this server consumes Apify credits.
+Prices from the live pricing record, read 2026-10-16:
+
+| Event | Price per event (USD) | Fires when |
+| --- | --- | --- |
+| `domain-analyzed` | $0.008 on the Free plan, down to $0.0068 on higher Apify plans | Charged once per domain analyzed, including when the domain turns out to be unreachable or blocked. Every row reports how much of the site was actually read, so a null result is a real answer rather than a failure. |
+| `apify-actor-start` | $0.00005 | Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event). |
+
+The current price is on the [actor's Apify page](https://apify.com/mambalabs/workplace-program-detector). Running this server consumes Apify credits.
 
 ## What this server does and does not do
 
