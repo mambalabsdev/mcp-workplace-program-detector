@@ -6,6 +6,16 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
+// Optional per call spending cap, passed through to the actor's own max_charge_usd
+// input. The actor enforces it; this wrapper only forwards it when set.
+const MAX_CHARGE_USD = z
+  .number()
+  .min(0)
+  .optional()
+  .describe(
+    "Optional spending cap for this call, in USD, passed to the actor as max_charge_usd. The run stops before any charge that would take it past this amount and keeps every row already charged. Leave empty to rely only on the maximum charge per run set on your Apify account.",
+  );
+
 const here = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(
   readFileSync(join(here, "..", "package.json"), "utf8"),
@@ -206,7 +216,7 @@ server.registerTool(
       "Detect which people programs a company publishes on its own surfaces, and return one flat row per domain. It reads two independent paths and each catches what the other misses: the company's live job postings through its Greenhouse, Lever or Ashby board, which is where benefits language that marketing pages omit shows up, and the careers, culture, benefits, DEI and ESG pages on the website, which is where employee resource group and volunteering language shows up. Either path can be turned off. If you already know the company's ATS board slug, pass ats_slug to skip discovery and read that board directly. Results are cached for 14 days and skipCache forces a fresh crawl. This reports what a company publishes, which is not the same as what it does: absence of a signal means the company does not say it publicly, not that the program does not exist. Requires an APIFY_TOKEN and consumes Apify credits. Read only: it reads public pages, it writes nothing.",
     annotations: {
       title: "Detect Workplace Programs",
-      readOnlyHint: true,
+      readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: true,
@@ -219,6 +229,7 @@ server.registerTool(
     scan_web_pages: z.boolean().optional().describe("Probes the careers, culture, benefits, DEI and ESG paths. This path finds ERG and volunteering language that job postings omit. Default: true."),
     max_pages: z.string().optional().describe("Sent as a string for Clay. Clamped to 1 to 25. Default: \"14\"."),
     skipCache: z.enum(["false", "true"]).optional().describe("false uses the 14 day cache, true forces a fresh crawl. Sent as a string for Clay, matching the fleet convention. Default: \"false\"."),
+      max_charge_usd: MAX_CHARGE_USD,
     },
   },
   async (args) =>
